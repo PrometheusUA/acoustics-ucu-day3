@@ -1,3 +1,7 @@
 venv
 *.pdf
 whisper
+LibriSpeech
+*.tar.gz
+patriotic_whisper_mixed_en_uk.pt
+__pycache__
