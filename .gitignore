@@ -5,3 +5,4 @@ LibriSpeech
 *.tar.gz
 patriotic_whisper_mixed_en_uk.pt
 __pycache__
+whisper_librespeech_shevtsov.pt
