@@ -33,11 +33,10 @@ def wer(str_a, str_b) -> float:
     return levenstein_distance/len_ref
 
 def levenstein_torch(str_a, str_b) -> int:
-    levenstein_matrix = torch.zeros((len(str_a) + 1, len(str_b) + 1), 
-                                    requires_grad=True)
+    levenstein_matrix = torch.zeros((len(str_a) + 1, len(str_b) + 1))
 
-    levenstein_matrix[0, :] = torch.arange(len(str_b) + 1)
-    levenstein_matrix[:, 0] = torch.arange(len(str_a) + 1)
+    levenstein_matrix[0, :] = torch.arange(len(str_a) + 1)
+    levenstein_matrix[:, 0] = torch.arange(len(str_b) + 1)
 
     for i in range(len(str_a)):
         for j in range(len(str_b)):
@@ -50,9 +49,9 @@ def levenstein_torch(str_a, str_b) -> int:
 
     return levenstein_matrix[-1, -1]
 
-def wer_loss(pred: torch.Tensor, labels: torch.Tensor):
+def wer_torch(pred: torch.Tensor, labels: torch.Tensor):
     batch_size, sentence_size = pred.size()
-    losses = torch.FloatTensor((batch_size), requires_grad=True)
+    losses = torch.tensor([0.0] * batch_size)
     for i in range(batch_size):
         distance = levenstein_torch(pred[i], labels[i])
         losses[i] = distance / sentence_size
